@@ -165,7 +165,6 @@ class drunkenWarior extends Command
                    else{ // destroy obj
                        $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
                        $target->explode($targets);
-
                    }
    
                    break;
@@ -178,8 +177,7 @@ class drunkenWarior extends Command
                    }
                    else{// destroy obj
                         $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
-                        $target->explode($targets);
-                       
+                        $target->explode($targets);          
                    }
    
                    break;

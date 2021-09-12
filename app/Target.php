@@ -36,6 +36,42 @@ abstract class Target {
     }
    
   }
+
+  public function hitOrDestroy($target, $points, $idx, &$targets){
+    
+    $hit = $target->hit($points);
+    
+    if($hit){
+        echo $hit.PHP_EOL;
+    }
+    else{ // destroy target
+
+        $targetHitName = $target->name();
+
+        switch ($targetHitName) {
+
+            case 'App\Dummy':
+                
+                echo $target->getDamageHitMsg($points).PHP_EOL;
+                unset($targets[$idx]);
+
+                break;
+
+            case 'App\Firecracker':
+               
+                echo $target->getDamageHitMsg($points).PHP_EOL;
+                $target->explode($targets);
+
+                break;
+            case 'App\Bomb':
+                
+                echo $target->getDamageHitMsg($points).PHP_EOL;
+                $target->explode($targets);
+
+                break;
+        }        
+    }
+  }
   
   abstract function getDamageHitMsg($points);
 }

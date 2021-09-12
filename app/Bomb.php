@@ -17,64 +17,22 @@ class Bomb extends Target {
         
         echo 'Bomb '.$this->uniqId.' exploded!'.PHP_EOL;
 
-        $explodedElIdx = false;
-
-        foreach($targets as $k=>$t){
-            if($t->uniqId == $this->uniqId){
-                $explodedElIdx = $k;
-                unset($targets[$k]);
-            }
-        }
-
         foreach($targets as $k => $target){ // iterate all targets
-        
-                if($target->uniqId != $this->uniqId){ // ignore the exploding target 
-        
-                    $randDamageHit = rand(25, 40);
-                   
-                    $hit = $target->hit($randDamageHit);
+
+            if($target->uniqId == $this->uniqId){
+                unset($targets[$k]);
+            }   
     
-                    if($hit){
-                        echo $hit.PHP_EOL;
-                    }
-                    else{ // destroy target
-                        $targetHitName = $target->name();
+            if($target->uniqId != $this->uniqId){ // ignore the exploding target 
+    
+                $randDamageHit = rand(25, 40);
 
-                        switch ($targetHitName) {
-
-                            case 'App\Dummy':
-                                
-                                
-                                echo $target->getDamageHitMsg($randDamageHit).PHP_EOL;
-                                unset($targets[$k]);
-
-                                break;
-                                
-                            case 'App\Firecracker':
-                               
-                                echo $target->getDamageHitMsg($randDamageHit).PHP_EOL;
-                                $target->explode($targets);
+                parent::hitOrDestroy($target, $randDamageHit, $k, $targets);
                 
-                                break;
-                            case 'App\Bomb':
-                                
-                
-                                echo $target->getDamageHitMsg($randDamageHit).PHP_EOL;
-                                $target->explode($targets);
-                            
-                
-                                break;
-                        }
-                    }
-
-                }
-                
-                
-
+            }
+       
         }
 
-
-        return $explodedElIdx;
     }
     
     function __destruct() {
