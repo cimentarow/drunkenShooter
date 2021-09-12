@@ -123,9 +123,7 @@ class drunkenWarior extends Command
             $targetsAr[] = new Firecracker(75,'firecracker_'.$i);
         }
 
-        for($i=0;$i<=0;$i++){
-            $targetsAr[] = new Bomb(100,'bomb_'.$i);
-        }
+        $targetsAr[] = new Bomb(100,'bomb_0');
 
         return $targetsAr;
 
