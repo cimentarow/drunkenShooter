@@ -14,7 +14,7 @@ class Dummy extends Target {
     }
 
     public function explode($targets){
-        // dummy doesnt explode
+        // dummy doesnt explode for now
     }
     
     function __destruct() {

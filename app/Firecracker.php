@@ -16,14 +16,13 @@ class Firecracker extends Target {
     public function explode(&$targets){
         
         echo 'Firecracker '.$this->uniqId.' exploded! '.PHP_EOL;
-
         
         foreach($targets as $k=>$t){
             if($t->uniqId == $this->uniqId){
                 unset($targets[$k]);
             }
         }
-
+      
         shuffle($targets); // shuffle targets
 
         for($i=0; $i<=2; $i++){ // iterate first 3 shuffled targets

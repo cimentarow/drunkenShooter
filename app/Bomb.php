@@ -17,6 +17,12 @@ class Bomb extends Target {
         
         echo 'Bomb '.$this->uniqId.' exploded!'.PHP_EOL;
 
+        foreach($targets as $k=>$t){ // unset bomb before impacting other targets to prevent second bomb explosion
+            if($t->uniqId == $this->uniqId){
+                unset($targets[$k]);
+            }
+        }
+
         foreach($targets as $k => $target){ // iterate all targets
 
             if($target->uniqId == $this->uniqId){
