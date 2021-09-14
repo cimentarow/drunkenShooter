@@ -40,9 +40,8 @@ abstract class Target {
     if($this->points > 0){
         return $this->getDamageHitMsg($points);
     }
-    else{
-        return false;
-    }
+    
+    return false;
    
   }
 
