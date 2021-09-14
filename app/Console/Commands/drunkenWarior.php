@@ -127,21 +127,15 @@ class drunkenWarior extends Command
 
     public function shoot(&$targets){
 
+         echo PHP_EOL;
+         echo PHP_EOL;
          $this->info('shooting!');
 
          if(!empty($targets)){
             $targetIdx = array_rand($targets);
             $target =  $targets[$targetIdx]; // hit random target ..
-
-            $hit = $target->hit($target::DAMAGE_HIT);
-                   
-            if($hit){
-                $this->info($hit);
-            }
-            else{ // destroy obj
-                $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
-                $target->explode($targets);
-            }
+          
+            $target->hitOrDestroy($target, $target::DAMAGE_HIT, $targetIdx, $targets);
    
          }
          else{
