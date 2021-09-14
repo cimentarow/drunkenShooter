@@ -84,5 +84,4 @@ abstract class Target {
     echo "The target ".$name." ".$this->uniqId." is destroyed.".PHP_EOL; 
   }
   
-  // abstract function getDamageHitMsg($points);
 }
