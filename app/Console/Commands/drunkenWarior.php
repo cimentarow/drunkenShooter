@@ -116,10 +116,10 @@ class drunkenWarior extends Command
 
         $targetsAr = [];
 
-        Target::create('App\Dummy', 50, 'dummy_', 8, $targetsAr);
-        Target::create('App\Firecracker', 75, 'firecracker_', 5, $targetsAr);
-        Target::create('App\Bomb', 100, 'bomb_', 1, $targetsAr);
-        Target::create('App\Dynamite', 15, 'dynamite_', 1, $targetsAr);
+        Target::create(Dummy::class, 50, 'dummy_', 8, $targetsAr);
+        Target::create(Firecracker::class, 75, 'firecracker_', 5, $targetsAr);
+        Target::create(Bomb::class, 100, 'bomb_', 1, $targetsAr);
+        Target::create(Dynamite::class, 15, 'dynamite_', 1, $targetsAr);
 
         return $targetsAr;
 
