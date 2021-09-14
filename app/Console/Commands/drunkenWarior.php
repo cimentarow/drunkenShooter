@@ -115,15 +115,9 @@ class drunkenWarior extends Command
 
         $targetsAr = [];
 
-        for($i=0;$i<=7;$i++){
-            $targetsAr[] = new Dummy(50,'dummy_'.$i);
-        }
-
-        for($i=0;$i<=4;$i++){
-            $targetsAr[] = new Firecracker(75,'firecracker_'.$i);
-        }
-
-        $targetsAr[] = new Bomb(100,'bomb_0');
+        Target::create('App\Dummy', 50, 'dummy_', 8, $targetsAr);
+        Target::create('App\Firecracker', 75, 'firecracker_', 5, $targetsAr);
+        Target::create('App\Bomb', 100, 'bomb_', 1, $targetsAr);
 
         return $targetsAr;
 
@@ -140,7 +134,7 @@ class drunkenWarior extends Command
    
             switch ($targetHitName) {
 
-               case 'App\Dummy':
+               case 'Dummy':
                    
                    $hit = $target->hit($target::DAMAGE_HIT);
                    
@@ -153,7 +147,7 @@ class drunkenWarior extends Command
                    }
                    
                    break;
-               case 'App\Firecracker':
+               case 'Firecracker':
                   
                    $hit = $target->hit($target::DAMAGE_HIT);
                    
@@ -166,8 +160,8 @@ class drunkenWarior extends Command
                    }
    
                    break;
-               case 'App\Bomb':
-                   
+               case 'Bomb':
+
                    $hit = $target->hit($target::DAMAGE_HIT);
                    
                    if($hit){

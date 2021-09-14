@@ -4,24 +4,10 @@ namespace App;
 class Firecracker extends Target {
     
     const DAMAGE_HIT = 12;
-
-    public function getDamageHit() {
-        return self::DAMAGE_HIT;
-    }
-
-    public function getDamageHitMsg($points){
-        return 'Nice shot! You damaged Firecracker '.$this->uniqId.' for '.$points.'!';
-    }
     
     public function explode(&$targets){
-        
-        echo 'Firecracker '.$this->uniqId.' exploded! '.PHP_EOL;
-        
-        foreach($targets as $k=>$t){
-            if($t->uniqId == $this->uniqId){
-                unset($targets[$k]);
-            }
-        }
+       
+        parent::preExplode($targets);
       
         shuffle($targets); // shuffle targets
 
@@ -43,10 +29,6 @@ class Firecracker extends Target {
 
         }
 
-    }
-    
-    function __destruct() {
-        echo "The target Firecracker '.$this->uniqId.' is destroyed. ".PHP_EOL;; 
     }
 
 }

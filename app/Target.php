@@ -22,7 +22,16 @@ abstract class Target {
   }
 
   function name() {
-    return get_class($this);
+    $class = get_class($this);
+    $name = str_replace("App\\", "", $class);
+    return $name;
+  }
+
+  public static function create($model, $points, $prefix, $count = 1, &$targets)
+  {
+      for ($i = 0; $i < $count; $i++) {
+          $targets[] = new $model($points, $prefix . $i);
+      }
   }
 
   public function hit($points){
@@ -50,20 +59,20 @@ abstract class Target {
 
         switch ($targetHitName) {
 
-            case 'App\Dummy':
+            case 'Dummy':
                 
                 echo $target->getDamageHitMsg($points).PHP_EOL;
                 unset($targets[$idx]);
 
                 break;
 
-            case 'App\Firecracker':
+            case 'Firecracker':
                
                 echo $target->getDamageHitMsg($points).PHP_EOL;
                 $target->explode($targets);
 
                 break;
-            case 'App\Bomb':
+            case 'Bomb':
                 
                 echo $target->getDamageHitMsg($points).PHP_EOL;
                 $target->explode($targets);
@@ -72,6 +81,26 @@ abstract class Target {
         }        
     }
   }
+
+  public function getDamageHitMsg($points){
+   
+    return 'Nice shot! You damaged '.$this->name().' '.$this->uniqId.' for '.$points.'!';
+  }
+
+  public function preExplode(&$targets){
+    echo $this->name().''.$this->uniqId.' exploded! '.PHP_EOL;
+        
+    foreach($targets as $k=>$t){
+        if($t->uniqId == $this->uniqId){
+            unset($targets[$k]);
+        }
+    }
+  }
+
+  function __destruct() {
+    $name = $this->name();
+    echo "The target ".$name." ".$this->uniqId." is destroyed.".PHP_EOL; 
+  }
   
-  abstract function getDamageHitMsg($points);
+  // abstract function getDamageHitMsg($points);
 }
