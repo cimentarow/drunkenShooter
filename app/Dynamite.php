@@ -1,9 +1,9 @@
 <?php
 namespace App;
 
-class Firecracker extends Target {
+class Dynamite extends Target {
     
-    const DAMAGE_HIT = 12;
+    const DAMAGE_HIT = 15;
     
     public function explode(&$targets){
        
@@ -11,17 +11,14 @@ class Firecracker extends Target {
       
         shuffle($targets); // shuffle targets
 
-        for($i=0; $i<=2; $i++){ // iterate first 3 shuffled targets
+        for($i=0; $i<=4; $i++){ // iterate first 3 shuffled targets
 
             if(isset($targets[$i])){
                 
                 $target = $targets[$i];
-       
-                $randDamageHit = rand(10, 15);
 
-                parent::hitOrDestroy($target, $randDamageHit, $i, $targets);
+                parent::hitOrDestroy($target, 20, $i, $targets);
                 
-
             }
 
         }

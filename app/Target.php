@@ -55,30 +55,9 @@ abstract class Target {
     }
     else{ // destroy target
 
-        $targetHitName = $target->name();
+          echo $target->getDamageHitMsg($points).PHP_EOL;
+          $target->explode($targets, $idx);
 
-        switch ($targetHitName) {
-
-            case 'Dummy':
-                
-                echo $target->getDamageHitMsg($points).PHP_EOL;
-                unset($targets[$idx]);
-
-                break;
-
-            case 'Firecracker':
-               
-                echo $target->getDamageHitMsg($points).PHP_EOL;
-                $target->explode($targets);
-
-                break;
-            case 'Bomb':
-                
-                echo $target->getDamageHitMsg($points).PHP_EOL;
-                $target->explode($targets);
-
-                break;
-        }        
     }
   }
 
@@ -87,8 +66,11 @@ abstract class Target {
     return 'Nice shot! You damaged '.$this->name().' '.$this->uniqId.' for '.$points.'!';
   }
 
-  public function preExplode(&$targets){
-    echo $this->name().''.$this->uniqId.' exploded! '.PHP_EOL;
+  public function preExplode(&$targets, $showExplodeMsg = true){
+
+    if($showExplodeMsg){
+      echo $this->name().' '.$this->uniqId.' exploded! '.PHP_EOL;
+    }
         
     foreach($targets as $k=>$t){
         if($t->uniqId == $this->uniqId){

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Bomb;
 use App\Dummy;
 use App\Firecracker;
+use App\Dynamite;
 use Illuminate\Console\Command;
 use App\Target;
 
@@ -118,6 +119,7 @@ class drunkenWarior extends Command
         Target::create('App\Dummy', 50, 'dummy_', 8, $targetsAr);
         Target::create('App\Firecracker', 75, 'firecracker_', 5, $targetsAr);
         Target::create('App\Bomb', 100, 'bomb_', 1, $targetsAr);
+        Target::create('App\Dynamite', 15, 'dynamite_', 1, $targetsAr);
 
         return $targetsAr;
 
@@ -130,50 +132,16 @@ class drunkenWarior extends Command
          if(!empty($targets)){
             $targetIdx = array_rand($targets);
             $target =  $targets[$targetIdx]; // hit random target ..
-            $targetHitName = $target->name();
-   
-            switch ($targetHitName) {
 
-               case 'Dummy':
+            $hit = $target->hit($target::DAMAGE_HIT);
                    
-                   $hit = $target->hit($target::DAMAGE_HIT);
-                   
-                   if($hit){
-                       $this->info($hit);
-                   }
-                   else{ // destroy obj
-                       $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
-                       unset($targets[$targetIdx]);
-                   }
-                   
-                   break;
-               case 'Firecracker':
-                  
-                   $hit = $target->hit($target::DAMAGE_HIT);
-                   
-                   if($hit){
-                       $this->info($hit);
-                   }
-                   else{ // destroy obj
-                       $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
-                       $target->explode($targets);
-                   }
-   
-                   break;
-               case 'Bomb':
-
-                   $hit = $target->hit($target::DAMAGE_HIT);
-                   
-                   if($hit){
-                       $this->info($hit);
-                   }
-                   else{// destroy obj
-                        $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
-                        $target->explode($targets);          
-                   }
-   
-                   break;
-           }
+            if($hit){
+                $this->info($hit);
+            }
+            else{ // destroy obj
+                $this->info($target->getDamageHitMsg($target::DAMAGE_HIT)); 
+                $target->explode($targets);
+            }
    
          }
          else{
