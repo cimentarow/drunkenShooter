@@ -98,7 +98,7 @@ class drunkenWarior extends Command
                 $shotResult = $this->shoot($targets);
 
                 if(!$shotResult){
-                    $this->info('Game ended! Total shots fired: '.$totalShotsCount);
+                    $this->info('Game ended! Total shots fired: '.($totalShotsCount-1));
                     $gameEnded = true;
                 }
                
@@ -129,9 +129,10 @@ class drunkenWarior extends Command
 
          echo PHP_EOL;
          echo PHP_EOL;
-         $this->info('shooting!');
-
+         
          if(!empty($targets)){
+         
+            $this->info('shooting!');
             $targetIdx = array_rand($targets);
             $target =  $targets[$targetIdx]; // hit random target ..
           
