@@ -11,7 +11,7 @@ class Dynamite extends Target {
       
         shuffle($targets); // shuffle targets
 
-        for($i=0; $i<=4; $i++){ // iterate first 3 shuffled targets
+        for($i=0; $i<=4; $i++){ // iterate first 5 shuffled targets
 
             if(isset($targets[$i])){
                 
